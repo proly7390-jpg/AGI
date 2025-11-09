@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>AGI Nexus — The Ultimate AI & AGI Encyclopedia</title>
+  <meta name="description" content="A massive, futuristic, single-file website covering AI and AGI: definitions, history, glossary, quiz, simulator, ethics, and more."/>
+  <style>
+    /* ================================
+       THEME — Futuristic Neon + Glass
+       ================================ */
+    :root{
+      --bg: #070b14;
+      --panel: #0f172a;
+      --panel-2: #0b1326;
+      --accent: #00ffe0;
+      --accent-2: #76a8ff;
+      --text: #eaf0ff;
+      --muted: #9fb3d6;
+      --warning: #ff7b7b;
+      --good: #74ffbf;
+      --border: rgba(255,255,255,0.08);
+      --shadow: 0 0 12px rgba(0,255,224,0.4);
+      --shadow-2: 0 0 24px rgba(118,168,255,0.35);
+      --radius: 18px;
+    }
+    *{box-sizing: border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial}
+    a{color:var(--accent)}
+    img{max-width:100%;border-radius:14px;border:1px solid var(--border)}
+    code,kbd,pre{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+    /* Header hero */
+    header{
+      position:relative;
+      padding:90px 20px 50px;
+      text-align:center;
+      overflow:hidden;
+      background:
+        radial-gradient(900px 400px at 50% -50%, rgba(0,255,224,0.12), transparent 70%),
+        radial-gradient(700px 300px at 50% 0%, rgba(118,168,255,0.10), transparent 70%);
+      border-bottom:1px solid var(--border);
+    }
+    header h1{font-size:56px;line-height:1.1;margin:0 0 12px;color:var(--accent);text-shadow:var(--shadow)}
+    header p{color:var(--muted);font-size:18px;max-width:850px;margin:0 auto}
+    .pill{display:inline-block;padding:6px 10px;border:1px solid var(--border);border-radius:999px;font-size:12px;color:var(--muted);margin-top:12px}
+    /* Sticky nav */
+    nav{
+      position:sticky;top:0;z-index:1000;background:rgba(15,23,42,0.85);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-inner{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;padding:14px}
+    nav a{
+      text-decoration:none;color:var(--accent);padding:10px 14px;border:1px solid var(--border);
+      border-radius:12px;transition:0.2s;background:linear-gradient(180deg, rgba(0,255,224,0.08), rgba(0,255,224,0.02));
+    }
+    nav a:hover{box-shadow:var(--shadow)}
+    /* Sections */
+    section{padding:50px 0;border-bottom:1px solid var(--border)}
+    .panel{
+      background:linear-gradient(180deg, rgba(13,20,40,0.85), rgba(9,14,28,0.85));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:24px;margin:18px 0;
+    }
+    .panel h2{margin:0 0 10px;color:var(--accent)}
+    .panel h3{margin:12px 0;color:var(--accent-2)}
+    .muted{color:var(--muted)}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    .grid-3{display:grid;grid-template-columns:repeat(3, 1fr);gap:22px}
+    .grid-4{display:grid;grid-template-columns:repeat(4, 1fr);gap:22px}
+    @media(max-width:1024px){.grid-3{grid-template-columns:repeat(2,1fr)}.grid-4{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:640px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+    .card{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:16px;
+      box-shadow:var(--shadow-2);
+    }
+    .card h4{margin:0 0 8px;color:var(--accent)}
+    /* Inputs and buttons */
+    input[type="text"], input[type="number"], input[type="range"], select, textarea{
+      width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);
+      background:var(--panel-2);color:var(--text);font-size:15px;
+    }
+    button{
+      background:linear-gradient(90deg, rgba(0,255,224,0.25), rgba(118,168,255,0.25));
+      color:var(--text);border:1px solid var(--border);padding:10px 14px;border-radius:12px;cursor:pointer;transition:0.2s;
+    }
+    button:hover{box-shadow:var(--shadow)}
+    /* Charts (CSS-only bars) */
+    .bar{height:14px;border-radius:999px;background:rgba(118,168,255,0.2);overflow:hidden;border:1px solid var(--border)}
+    .bar > span{display:block;height:100%;background:linear-gradient(90deg, var(--accent), var(--accent-2))}
+    /* Footer */
+    footer{padding:28px 0;color:var(--muted);text-align:center}
+  </style>
+</head>
+<body>
+
+  <!-- ===========================
+       HERO
+       =========================== -->
+  <header>
+    <div class="container">
+      <h1>AGI Nexus</h1>
+      <p class="muted">A massive, futuristic, single-file encyclopedia of Artificial Intelligence and Artificial General Intelligence — built for clarity, scale, and immersion. Explore definitions, history, architectures, ethics, simulations, and hands-on experiments in one place.</p>
+      <span class="pill" aria-hidden="true">Single file • No dependencies • Mobile friendly • Massive content</span>
+    </div>
+  </header>
+
+  <!-- ===========================
+       NAV
+       =========================== -->
+  <nav>
+    <div class="nav-inner container" role="navigation" aria-label="Main navigation">
+      <a href="#overview">Overview</a>
+      <a href="#history">History</a>
+      <a href="#architectures">Architectures</a>
+      <a href="#glossary">Glossary</a>
+      <a href="#articles">Deep dives</a>
+      <a href="#quiz">Quiz</a>
+      <a href="#simulator">AGI simulator</a>
+      <a href="#sandbox">Code sandbox</a>
+      <a href="#ethics">Ethics</a>
+      <a href="#roadmap">Learning roadmap</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </nav>
+
+  <!-- ===========================
+       OVERVIEW
+       =========================== -->
+  <section id="overview">
+    <div class="container">
+      <div class="panel">
+        <h2>Overview: AI vs AGI</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h4>Artificial Intelligence (AI)</h4>
+            <p class="muted">AI refers to systems that perform specific tasks that typically require intelligence: vision, speech, translation, planning, prediction, and control. Most AI today is narrow — optimized to excel within a defined domain using data and statistical learning.</p>
+            <ul>
+              <li><strong>Scope:</strong> Narrow, task-specific</li>
+              <li><strong>Learning:</strong> Supervised, self-supervised, reinforcement</li>
+              <li><strong>Limitations:</strong> Brittle outside training distribution</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Artificial General Intelligence (AGI)</h4>
+            <p class="muted">AGI is the hypothetical class of systems capable of performing any intellectual task a human can, across domains, adapting with minimal guidance. It implies robust reasoning, transfer learning, long-horizon planning, and alignment with human values.</p>
+            <ul>
+              <li><strong>Scope:</strong> General, cross-domain transfer</li>
+              <li><strong>Capabilities:</strong> Reasoning, memory, tool-use, metacognition</li>
+              <li><strong>Challenges:</strong> Alignment, robustness, interpretability, governance</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Key differences</h3>
+        <div class="grid-3">
+          <div class="card">
+            <h4>Scope</h4>
+            <p class="muted">AI is typically narrow and domain-specific; AGI is broad and cross-domain.</p>
+            <div class="bar"><span style="width: 35%"></span></div>
+          </div>
+          <div class="card">
+            <h4>Adaptation</h4>
+            <p class="muted">AI adapts within training distributions; AGI adapts to novel situations with minimal retraining.</p>
+            <div class="bar"><span style="width: 60%"></span></div>
+          </div>
+          <div class="card">
+            <h4>Autonomy</h4>
+            <p class="muted">AI operates with constrained autonomy; AGI would plan and act with greater independence while requiring alignment.</p>
+            <div class="bar"><span style="width: 75%"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       HISTORY
+       =========================== -->
+  <section id="history">
+    <div class="container">
+      <div class="panel">
+        <h2>History and milestones</h2>
+        <div class="grid-3">
+          <div class="card">
+            <h4>Early foundations</h4>
+            <p class="muted">From logic and automata to cybernetics and information theory, early thinkers framed the idea that computation could emulate aspects of intelligence.</p>
+            <ul>
+              <li><strong>Logic:</strong> Formal proofs, inference</li>
+              <li><strong>Cybernetics:</strong> Feedback control</li>
+              <li><strong>Automata:</strong> State machines</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Symbolic AI era</h4>
+            <p class="muted">Rule-based systems and expert systems dominated, achieving strong performance in constrained domains but struggled with ambiguity and perception.</p>
+            <ul>
+              <li><strong>Search:</strong> A*, minimax</li>
+              <li><strong>Knowledge:</strong> Ontologies, logic</li>
+              <li><strong>Limits:</strong> Brittleness, scaling</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Statistical and neural revival</h4>
+            <p class="muted">Data-driven learning and deep neural networks unlocked breakthroughs in vision, speech, and language with large datasets and compute.</p>
+            <ul>
+              <li><strong>Deep nets:</strong> CNNs, RNNs, Transformers</li>
+              <li><strong>Training:</strong> SGD, backprop</li>
+              <li><strong>Hardware:</strong> GPUs, TPUs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Timeline highlights</h3>
+        <div class="grid-4">
+          <div class="card"><h4>1950s</h4><p class="muted">Foundations of AI and tests for machine intelligence.</p></div>
+          <div class="card"><h4>1960–80s</h4><p class="muted">Symbolic systems, expert knowledge bases.</p></div>
+          <div class="card"><h4>1990–2010</h4><p class="muted">Statistical learning, kernel methods, early deep nets.</p></div>
+          <div class="card"><h4>2010–present</h4><p class="muted">Deep learning breakthroughs, large-scale language models, multi-modal systems, tool-use.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       ARCHITECTURES
+       =========================== -->
+  <section id="architectures">
+    <div class="container">
+      <div class="panel">
+        <h2>Architectures and paradigms</h2>
+        <div class="grid-3">
+          <div class="card">
+            <h4>Perception models</h4>
+            <p class="muted">Vision, audio, and multimodal encoders map raw data to meaningful representations.</p>
+            <ul>
+              <li><strong>CNNs:</strong> Images</li>
+              <li><strong>ViTs:</strong> Patches</li>
+              <li><strong>Audio encoders:</strong> Spectrograms</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Sequence models</h4>
+            <p class="muted">Language and time-series models capture long-range dependencies and contextual meaning.</p>
+            <ul>
+              <li><strong>Transformers:</strong> Attention</li>
+              <li><strong>RNNs:</strong> Temporal memory</li>
+              <li><strong>Hybrid:</strong> Retrieval + generation</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Decision-making</h4>
+            <p class="muted">Agents learn policies via trial-and-error and planning algorithms, optimizing rewards.</p>
+            <ul>
+              <li><strong>RL:</strong> Policy/value</li>
+              <li><strong>Model-based:</strong> Planning</li>
+              <li><strong>Tool-use:</strong> Function calling</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>System patterns</h3>
+        <div class="grid-2">
+          <div class="card">
+            <h4>Retrieval-augmented generation</h4>
+            <p class="muted">Combines generation with a live knowledge store for accuracy and grounding.</p>
+          </div>
+          <div class="card">
+            <h4>Agents and orchestrators</h4>
+            <p class="muted">Multi-agent systems coordinate tasks, memory, and tools to achieve goals.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       GLOSSARY
+       =========================== -->
+  <section id="glossary">
+    <div class="container">
+      <div class="panel">
+        <h2>Glossary: AI & AGI terms</h2>
+        <p class="muted">Search across a large library of concepts. Type to filter instantly.</p>
+        <input id="glossarySearch" type="text" placeholder="Search terms, e.g., Transformer, alignment, bias..." aria-label="Search glossary"/>
+        <div id="glossaryResults" class="grid-3" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       DEEP DIVES
+       =========================== -->
+  <section id="articles">
+    <div class="container">
+      <div class="panel">
+        <h2>Deep dives: Big-picture essays</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h4>From narrow intelligence to generality</h4>
+            <p class="muted">Generality depends on robust abstraction, transfer, and the ability to decompose novel problems. Systems progress by combining representation learning (to compress complexity), planning (to structure search), and tool-use (to expand capabilities beyond a core policy). Memory and retrieval connect present context with past experience, while metacognition monitors reliability.</p>
+            <p class="muted">Achieving generality isn’t merely scaling parameters; it’s the integration of modules — perception, language, reasoning, exploration, and ethics — into a cohesive agent with calibrated uncertainty and corrigibility. The path to AGI likely involves hybrid architectures that can learn new tasks, form theories, and revise beliefs.</p>
+          </div>
+          <div class="card">
+            <h4>Why alignment and interpretability matter</h4>
+            <p class="muted">Powerful systems need constraints that reflect human goals. Alignment techniques range from preference learning and constitutional guidance to oversight and red-teaming. Interpretability helps us understand how models represent concepts and make decisions, which aids in detecting spurious correlations and failure modes.</p>
+            <p class="muted">A practical approach blends transparency, audits, and robust evaluation: measure capabilities, safety, and societal impacts. For AGI-scale systems, governance becomes essential — setting deployment norms, reporting standards, and mechanisms for rapid response if unexpected behavior arises.</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <h4>Scaling laws, data, and compute</h4>
+            <p class="muted">Model performance often follows predictable trends with respect to parameters, dataset size, and compute budgets. However, beyond scaling, data quality and diversity drive generalization. Synthetic data, curriculum learning, and active sampling improve coverage of rare or critical cases.</p>
+            <p class="muted">Efficient training leverages parallelism, sparsity, and better optimizers; efficient inference uses distillation, quantization, and caching — making large models practical on consumer hardware.</p>
+          </div>
+          <div class="card">
+            <h4>Agents with tools, memory, and planning</h4>
+            <p class="muted">Modern agents can browse, call APIs, control apps, and iteratively refine plans. Memory vaults preserve context across sessions; planners break objectives into steps, simulate outcomes, and choose actions. The most capable systems calibrate confidence, defer when uncertain, and accept corrections — crucial behaviors for safe autonomy.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       QUIZ ENGINE
+       =========================== -->
+  <section id="quiz">
+    <div class="container">
+      <div class="panel">
+        <h2>Quiz engine: Test your knowledge</h2>
+        <p class="muted">Select answers and submit. Instant feedback and score tracking.</p>
+        <div id="quizContainer" class="grid-2"></div>
+        <div class="panel">
+          <button id="submitQuiz">Submit quiz</button>
+          <button id="resetQuiz" style="margin-left:10px">Reset</button>
+          <p id="quizScore" class="muted" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       AGI TIMELINE SIMULATOR
+       =========================== -->
+  <section id="simulator">
+    <div class="container">
+      <div class="panel">
+        <h2>AGI timeline simulator</h2>
+        <p class="muted">Explore hypothetical arrival years and see how perceived risks and benefits could change. Drag the slider.</p>
+        <div class="grid-2">
+          <div class="card">
+            <label for="agiYear"><strong>Hypothetical AGI arrival year</strong></label>
+            <input id="agiYear" type="range" min="2025" max="2100" value="2045"/>
+            <p class="muted">Year: <span id="agiYearLabel">2045</span></p>
+            <div>
+              <p><strong>Innovation benefit</strong></p>
+              <div class="bar"><span id="benefitBar" style="width:60%"></span></div>
+            </div>
+            <div style="margin-top:14px">
+              <p><strong>Safety risk</strong></p>
+              <div class="bar"><span id="riskBar" style="width:40%"></span></div>
+            </div>
+          </div>
+          <div class="card">
+            <h4>Scenario description</h4>
+            <p id="scenarioText" class="muted">In mid-century scenarios, society balances rapid innovation with mature governance. Safety practices are widespread, and benefits reach many sectors.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       CODE SANDBOX (SIMULATED)
+       =========================== -->
+  <section id="sandbox">
+    <div class="container">
+      <div class="panel">
+        <h2>Code sandbox: Try small experiments</h2>
+        <p class="muted">Type a simple “pseudo-code” and run to see a simulated output. This sandbox is safe, local, and doesn’t execute external code.</p>
+        <div class="grid-2">
+          <div class="card">
+            <h4>Editor</h4>
+            <textarea id="codeInput" rows="10" placeholder="// Example
+EMBED('dog') -> vector
+COSINE_SIM(vector, 'animal')
+GENERATE('Write a haiku about transformers')"></textarea>
+            <div style="margin-top:12px"><button id="runCode">Run</button> <button id="clearCode" style="margin-left:10px">Clear</button></div>
+          </div>
+          <div class="card">
+            <h4>Output</h4>
+            <pre id="codeOutput" style="min-height:200px;white-space:pre-wrap;border:1px solid var(--border);border-radius:12px;padding:12px;background:var(--panel-2)"></pre>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Sample snippets</h3>
+          <div class="grid-3">
+            <div class="card"><code>EMBED('cat'); NEAREST('cat', 5)</code></div>
+            <div class="card"><code>GENERATE('Explain RL in 2 lines')</code></div>
+            <div class="card"><code>CLASSIFY('email text', ['spam','not spam'])</code></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       ETHICS DASHBOARD
+       =========================== -->
+  <section id="ethics">
+    <div class="container">
+      <div class="panel">
+        <h2>Ethics & safety dashboard</h2>
+        <p class="muted">A structured checklist to consider before deploying powerful systems. This is informational and encourages responsible design.</p>
+        <div class="grid-3">
+          <div class="card">
+            <h4>Alignment</h4>
+            <ul>
+              <li>Goal specification clarity</li>
+              <li>Preference modeling and oversight</li>
+              <li>Corrigibility and deferral when uncertain</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Robustness</h4>
+            <ul>
+              <li>Adversarial testing and red-teaming</li>
+              <li>OOD generalization audits</li>
+              <li>Fallback modes and safe failure</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Societal impact</h4>
+            <ul>
+              <li>Transparency and reporting</li>
+              <li>Accessibility and benefit distribution</li>
+              <li>Environmental footprint monitoring</li>
+            </ul>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Risk lenses</h3>
+          <div class="grid-2">
+            <div class="card">
+              <h4>Near-term</h4>
+              <p class="muted">Bias, misinformation, misuse, labor displacement, and privacy concerns.</p>
+            </div>
+            <div class="card">
+              <h4>Long-term</h4>
+              <p class="muted">Misaligned autonomy, concentration of power, capability overhang, and systemic fragility.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       LEARNING ROADMAP
+       =========================== -->
+  <section id="roadmap">
+    <div class="container">
+      <div class="panel">
+        <h2>Learning roadmap: From beginner to builder</h2>
+        <div class="grid-3">
+          <div class="card">
+            <h4>Stage 1: Foundations</h4>
+            <ul>
+              <li>Math basics: linear algebra, probability</li>
+              <li>Python: data structures, Numpy</li>
+              <li>ML intro: supervised learning</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Stage 2: Models</h4>
+            <ul>
+              <li>CNNs, Transformers, attention</li>
+              <li>Training: backprop, optimizers</li>
+              <li>Evaluation: accuracy, F1, calibration</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Stage 3: Systems</h4>
+            <ul>
+              <li>RAG pipelines, vector search</li>
+              <li>Agents, tools, memory</li>
+              <li>Safety, logging, observability</li>
+            </ul>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Practice projects</h3>
+          <div class="grid-2">
+            <div class="card">
+              <h4>Build a mini RAG chatbot</h4>
+              <p class="muted">Index PDFs, retrieve relevant chunks, and respond with grounded citations.</p>
+            </div>
+            <div class="card">
+              <h4>Train a tiny image classifier</h4>
+              <p class="muted">Classify a small dataset, measure calibration, and try augmentations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       FAQ
+       =========================== -->
+  <section id="faq">
+    <div class="container">
+      <div class="panel">
+        <h2>FAQ</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h4>Is AGI real today?</h4>
+            <p class="muted">AGI remains hypothetical; current systems are highly capable but not generally intelligent across all tasks without guidance.</p>
+          </div>
+          <div class="card">
+            <h4>Does bigger always mean better?</h4>
+            <p class="muted">Scaling helps, but data quality, architecture, and training objectives matter. Efficiency and safety are equally important.</p>
+          </div>
+          <div class="card">
+            <h4>Why focus on ethics?</h4>
+            <p class="muted">Capability without responsibility can cause harm. Ethics guides deployment towards beneficial outcomes.</p>
+          </div>
+          <div class="card">
+            <h4>Can I host this as-is?</h4>
+            <p class="muted">Yes. It’s a single static file. No server required.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       SCRIPTS — DATA + LOGIC
+       =========================== -->
+  <script>
+    /* ==========
+       GLOSSARY
+       ========== */
+    const glossaryData = [
+      {t:"Activation Function",d:"Determines neuron output; enables non-linearity."},
+      {t:"Actor-Critic",d:"RL architecture combining policy (actor) and value estimation (critic)."},
+      {t:"Adversarial Example",d:"Input crafted to fool a model into incorrect prediction."},
+      {t:"Agent",d:"System that perceives, decides, and acts to achieve goals."},
+      {t:"Alignment",d:"Ensuring AI goals and behaviors match human intentions and values."},
+      {t:"Alpha-Beta Pruning",d:"Search optimization for minimax in game trees."},
+      {t:"Anomaly Detection",d:"Identify unusual patterns deviating from normal behavior."},
+      {t:"Attention",d:"Mechanism focusing on relevant tokens or features."},
+      {t:"Autoencoder",d:"Neural network that compresses and reconstructs inputs."},
+      {t:"Backpropagation",d:"Algorithm to compute gradients for training neural networks."},
+      {t:"Bayesian Inference",d:"Updating beliefs in light of evidence via Bayes' rule."},
+      {t:"Benchmark",d:"Standardized evaluation to compare model performance."},
+      {t:"Bias (Model)",d:"Systematic error due to data or design; not social bias."},
+      {t:"Bias (Social)",d:"Unequal outcomes related to demographic or social factors."},
+      {t:"Calibration",d:"Match predicted probabilities to actual likelihoods."},
+      {t:"Capsule Network",d:"Model capturing hierarchical relationships among features."},
+      {t:"Categorical Cross-Entropy",d:"Loss for multi-class classification."},
+      {t:"Causal Inference",d:"Identify cause-effect relationships beyond correlation."},
+      {t:"Chain-of-Thought",d:"Explicit reasoning steps produced by a model."},
+      {t:"Checkpoint",d:"Saved model parameters for training resumption or deployment."},
+      {t:"Class Imbalance",d:"Unequal class frequencies affecting learning."},
+      {t:"Clustering",d:"Grouping similar items without labels."},
+      {t:"Cold Start",d:"Difficulty in recommendations for new users/items."},
+      {t:"Computer Vision",d:"AI field focused on understanding images and video."},
+      {t:"Contrastive Learning",d:"Learn representations by pulling similar items together apart from dissimilar."},
+      {t:"Corrigibility",d:"Willingness of an AI system to accept and adapt to corrections."},
+      {t:"Cost Function",d:"Objective guiding training; minimized by optimization."},
+      {t:"Curriculum Learning",d:"Order training data from simple to complex."},
+      {t:"Data Augmentation",d:"Transform inputs to increase dataset diversity."},
+      {t:"Data Drift",d:"Change in data distribution over time affecting performance."},
+      {t:"Decision Tree",d:"Model using hierarchical rules to split data."},
+      {t:"Deep Learning",d:"Learning via multi-layer neural networks."},
+      {t:"Dimensionality Reduction",d:"Compress variables while preserving information."},
+      {t:"Distillation",d:"Transfer knowledge from large to small model."},
+      {t:"Domain Adaptation",d:"Transfer learning across related domains."},
+      {t:"Embeddings",d:"Dense vectors capturing semantic relationships."},
+      {t:"Encoder-Decoder",d:"Architecture mapping inputs to outputs with latent stage."},
+      {t:"Episode",d:"Sequence of interactions in RL from start to terminal."},
+      {t:"Exploration vs Exploitation",d:"Balance discovering new actions vs using known good ones."},
+      {t:"Feature Engineering",d:"Design meaningful inputs from raw data."},
+      {t:"Few-Shot Learning",d:"Generalize from a small number of examples."},
+      {t:"Fine-Tuning",d:"Adapt a pre-trained model to a specific task."},
+      {t:"Forgotten Event",d:"Case removed due to privacy or legal requests."},
+      {t:"FP16/INT8 Quantization",d:"Lower precision to speed and shrink models."},
+      {t:"GAN",d:"Generator-discriminator competition to synthesize data."},
+      {t:"Generalization",d:"Performance on unseen data."},
+      {t:"Generative Model",d:"Model that can produce novel samples like text or images."},
+      {t:"Gradient Descent",d:"Iterative optimization moving along negative gradient."},
+      {t:"Hallucination",d:"Plausible but incorrect output from a generative model."},
+      {t:"Heuristic",d:"Rule-of-thumb guiding search or decision-making."},
+      {t:"Hyperparameter",d:"Training setting chosen externally (e.g., learning rate)."},
+      {t:"Imitation Learning",d:"Learn policies from demonstration data."},
+      {t:"Interpretability",d:"Understanding internal representations and decisions."},
+      {t:"Kalman Filter",d:"Recursive estimator for temporal signals."},
+      {t:"Kernel Method",d:"Map inputs into high-dimensional spaces for separation."},
+      {t:"KL Divergence",d:"Measure of distribution difference."},
+      {t:"Knowledge Graph",d:"Nodes and edges representing entities and relations."},
+      {t:"Label Smoothing",d:"Regularization to reduce overconfidence."},
+      {t:"Language Model",d:"Predicts next token; can generate or score text."},
+      {t:"Latent Space",d:"Compressed internal representation of inputs."},
+      {t:"Logits",d:"Pre-softmax scores output by a classifier."},
+      {t:"Loss Function",d:"Objective to optimize during training."},
+      {t:"MCTS",d:"Monte Carlo Tree Search guided by simulations."},
+      {t:"Meta-Learning",d:"Learn how to learn across tasks quickly."},
+      {t:"Metric Learning",d:"Learn distance functions that reflect similarity."},
+      {t:"Minimax",d:"Adversarial search minimizing potential loss."},
+      {t:"Model Serving",d:"Deploy models for real-time usage."},
+      {t:"Multi-Modal",d:"Model handles text, images, audio, or actions jointly."},
+      {t:"NLP",d:"Understanding and generating human language."},
+      {t:"OOD",d:"Out-of-distribution inputs causing failures."},
+      {t:"Optimizer",d:"Algorithm updating parameters to minimize loss."},
+      {t:"Overfitting",d:"Memorize noise; poor generalization."},
+      {t:"PEFT",d:"Parameter-efficient fine-tuning (adapters, LoRA)."},
+      {t:"Perplexity",d:"Measure of language model uncertainty."},
+      {t:"Policy Gradient",d:"Optimize policy directly via gradient ascent."},
+      {t:"Positional Encoding",d:"Represent token order in transformers."},
+      {t:"Precision/Recall",d:"Measures of accuracy and completeness."},
+      {t:"Prompt Engineering",d:"Craft inputs to steer model behavior."},
+      {t:"Quantization",d:"Lower-precision representation to speed inference."},
+      {t:"RAG",d:"Retrieval-Augmented Generation for grounding."},
+      {t:"Reinforcement Learning",d:"Learn actions through rewards and penalties."},
+      {t:"Representation Learning",d:"Automatically discover useful features."},
+      {t:"Reward Model",d:"Score outputs for alignment with preferences."},
+      {t:"RLHF",d:"Reinforcement learning from human feedback."},
+      {t:"Robustness",d:"Resilience to perturbations and shifts."},
+      {t:"Scaling Law",d:"Performance relation to size/compute/data."},
+      {t:"Self-Supervised Learning",d:"Learn from intrinsic signals."},
+      {t:"Self-Play",d:"Agents train by playing themselves."},
+      {t:"Seq2Seq",d:"Map input sequences to output sequences."},
+      {t:"Softmax",d:"Convert logits to probabilities."},
+      {t:"Synthetic Data",d:"Artificially generated training examples."},
+      {t:"Temperature",d:"Sampling parameter controlling randomness."},
+      {t:"Top-k / Top-p",d:"Limit generation to likely tokens or mass."},
+      {t:"Transfer Learning",d:"Use knowledge from one task for another."},
+      {t:"Transformer",d:"Attention-based architecture for sequences."},
+      {t:"Underfitting",d:"Too simple; fails to capture patterns."},
+      {t:"Vector Database",d:"Index embeddings for similarity search."},
+      {t:"Zero-Shot Learning",d:"Generalize without task-specific examples."},
+      {t:"Ablation Study",d:"Remove components to measure impact."},
+      {t:"Algorithmic Fairness",d:"Methods to reduce unfair outcomes."},
+      {t:"API Tool-Use",d:"Models calling external functions."},
+      {t:"Augmented Intelligence",d:"AI assisting human decision-making."},
+      {t:"Batch Normalization",d:"Normalize activations; stabilize training."},
+      {t:"BLEU",d:"Machine translation quality metric."},
+      {t:"Confidence Calibration",d:"Align scores with success probabilities."},
+      {t:"Constitutional AI",d:"Guided by a set of principles or rules."},
+      {t:"Data Governance",d:"Policies for data collection and use."},
+      {t:"Dataset Card",d:"Documentation of dataset properties."},
+      {t:"Debiasing",d:"Reduce social or statistical bias."},
+      {t:"Edge Inference",d:"Run models on local devices."},
+      {t:"Embedding Space",d:"Geometry of semantic proximity."},
+      {t:"Energy Footprint",d:"Compute and power usage impact."},
+      {t:"Evasion Attack",d:"Inputs designed to bypass detection."},
+      {t:"Explainability",d:"Human-understandable behavior."},
+      {t:"Fallback Mode",d:"Safe default behavior under uncertainty."},
+      {t:"Federated Learning",d:"Train across devices privately."},
+      {t:"Feedback Loop",d:"Outputs influence future inputs."},
+      {t:"Guardrails",d:"Constraints preventing unsafe outputs."},
+      {t:"Human-in-the-Loop",d:"Keep a person supervising decisions."},
+      {t:"Latency",d:"Time it takes to respond."},
+      {t:"Learning Rate",d:"Step size for parameter updates."},
+      {t:"LoRA",d:"Low-rank adaptation for tuning."},
+      {t:"Memory Vault",d:"Persistent store for agent recall."},
+      {t:"Model Card",d:"Documentation of model behavior."},
+      {t:"Multi-Agent System",d:"Multiple agents collaborating."},
+      {t:"Outlier",d:"Data point far from typical values."},
+      {t:"Pareto Frontier",d:"Trade-offs across metrics."},
+      {t:"Personalization",d:"Tailor outputs to context."},
+      {t:"Poisoning Attack",d:"Corrupt training data."},
+      {t:"Privacy-Preserving ML",d:"Learning under privacy constraints."},
+      {t:"Reliability",d:"Consistency of correct operation."},
+      {t:"Retrieval",d:"Find relevant information."},
+      {t:"Reward Hacking",d:"Exploit objective in unintended ways."},
+      {t:"Risk Register",d:"Track identified risks."},
+      {t:"Safety Case",d:"Structured safety argument."},
+      {t:"Sparsity",d:"Fewer active parameters."},
+      {t:"Specification Gaming",d:"Optimize proxy metrics."},
+      {t:"Stress Testing",d:"Evaluate under extremes."},
+      {t:"System Prompt",d:"Foundational instruction."},
+      {t:"Telemetry",d:"Collect runtime metrics."},
+      {t:"Test-Time Adaptation",d:"Adjust at inference for shifts."},
+      {t:"Toolformer",d:"Model trained to use tools."},
+      {t:"Toxicity",d:"Harmful or abusive outputs."},
+      {t:"Uncertainty Estimation",d:"Quantify prediction confidence."},
+      {t:"User Study",d:"Evaluate with real users."},
+      {t:"Validation Set",d:"Tune hyperparameters."},
+      {t:"Vector Quantization",d:"Discrete codebooks."},
+      {t:"Weighted Ensemble",d:"Combine models with weights."},
+      {t:"Write-Ahead Logging",d:"Record changes before applying."},
+      {t:"Agency",d:"Capacity to plan and act."},
+      {t:"Catastrophic Forgetting",d:"Lose old knowledge when learning new."},
+      {t:"Cognitive Architecture",d:"Modular cognition-like system."},
+      {t:"Common Sense",d:"Grounded everyday understanding."},
+      {t:"Compositionality",d:"Combine simple elements into complex ideas."},
+      {t:"Delegation",d:"Hand tasks to sub-agents or tools."},
+      {t:"Emergence",d:"New behaviors from scale or interaction."},
+      {t:"Grounding",d:"Tie symbols to real referents."},
+      {t:"Meta-Cognition",d:"Monitor and regulate own thinking."},
+      {t:"Moral Uncertainty",d:"Unclear ethical weighting."},
+      {t:"Recursive Self-Improvement",d:"Improve own learning process."},
+      {t:"Situational Awareness",d:"Recognize context and capabilities."},
+      {t:"Theory of Mind",d:"Model beliefs and intents of others."},
+      {t:"Value Learning",d:"Infer human values from behavior."},
+      {t:"World Model",d:"Internal simulation of dynamics."}
+    ];
+    const glossaryResults = document.getElementById('glossaryResults');
+    const glossarySearch = document.getElementById('glossarySearch');
+    function renderGlossary(items){
+      glossaryResults.innerHTML = '';
+      items.forEach(({t,d})=>{
+        const el = document.createElement('div');
+        el.className = 'card';
+        el.innerHTML = `<h4>${t}</h4><p class="muted">${d}</p>`;
+        glossaryResults.appendChild(el);
+      });
+    }
+    function filterGlossary(q){
+      const s = q.toLowerCase();
+      return glossaryData.filter(({t,d}) => t.toLowerCase().includes(s) || d.toLowerCase().includes(s));
+    }
+    glossarySearch.addEventListener('input', () => renderGlossary(filterGlossary(glossarySearch.value)));
+    renderGlossary(glossaryData);
+
+    /* ==========
+       QUIZ ENGINE
+       ========== */
+    const quizQuestions = [
+      {
+        q: "What distinguishes AGI from typical AI systems?",
+        options: ["Access to larger datasets", "Ability to perform any intellectual task across domains", "Faster training time", "Better image recognition"],
+        answer: 1,
+        explain: "AGI implies broad competence across domains with robust adaptation."
+      },
+      {
+        q: "Which architecture relies on attention mechanisms?",
+        options: ["Decision Trees", "Transformers", "KNN", "Naive Bayes"],
+        answer: 1,
+        explain: "Transformers use self-attention to model long-range dependencies."
+      },
+      {
+        q: "What is RAG?",
+        options: ["Random Approximation Graph", "Retrieval-Augmented Generation", "Rapid Agent Growth", "Residual Attention Gate"],
+        answer: 1,
+        explain: "RAG grounds generation with retrieved context for accuracy."
+      },
+      {
+        q: "Which challenge relates to trust and understanding of model internals?",
+        options: ["Quantization", "Interpretability", "Batch Norm", "Beam Search"],
+        answer: 1,
+        explain: "Interpretability helps explain decisions and internal representations."
+      },
+      {
+        q: "In reinforcement learning, the agent primarily optimizes:",
+        options: ["Loss function", "Cumulative reward", "Regularization term", "Gradient magnitude"],
+        answer: 1,
+        explain: "RL focuses on maximizing expected cumulative reward via policies."
+      },
+      {
+        q: "Which issue occurs when models are overly confident but wrong?",
+        options: ["Underfitting", "Calibration error", "Data drift", "Sparsity"],
+        answer: 1,
+        explain: "Poor calibration yields mismatched confidence vs actual accuracy."
+      },
+      {
+        q: "What is a common way to reduce model size for faster inference?",
+        options: ["Data augmentation", "Quantization", "Overfitting", "Increasing learning rate"],
+        answer: 1,
+        explain: "Quantization lowers precision (e.g., INT8) to speed up inference."
+      },
+      {
+        q: "Which practice supports safe behavior under uncertainty?",
+        options: ["Reward hacking", "Corrigibility", "Benchmark leakage", "Spec gaming"],
+        answer: 1,
+        explain: "Corrigibility encourages deferring or accepting corrections."
+      },
+      {
+        q: "Self-supervised learning typically relies on:",
+        options: ["Manual labels", "Intrinsic signals within data", "Handcrafted features", "Hyperparameter sweeps"],
+        answer: 1,
+        explain: "SSL uses tasks like next-token prediction or masked span filling."
+      },
+      {
+        q: "Retrieval-augmented systems require:",
+        options: ["Large batch sizes", "A knowledge store or index", "Only supervised labels", "Beam search only"],
+        answer: 1,
+        explain: "RAG integrates a retriever with the generator."
+      }
+    ];
+    const quizContainer = document.getElementById('quizContainer');
+    const submitQuizBtn = document.getElementById('submitQuiz');
+    const resetQuizBtn = document.getElementById('resetQuiz');
+    const quizScore = document.getElementById('quizScore');
+
+    function renderQuiz(){
+      quizContainer.innerHTML = '';
+      quizQuestions.forEach((item, i)=>{
+        const card = document.createElement('div');
+        card.className = 'card';
+        const optionsHTML = item.options.map((opt, idx)=>`
+          <label style="display:block;margin:6px 0">
+            <input type="radio" name="q${i}" value="${idx}" /> ${opt}
+          </label>
+        `).join('');
+        card.innerHTML = `
+          <h4>Q${i+1}. ${item.q}</h4>
+          <div>${optionsHTML}</div>
+          <p id="explain${i}" class="muted" style="display:none;margin-top:8px">${item.explain}</p>
+        `;
+        quizContainer.appendChild(card);
+      });
+    }
+    function submitQuiz(){
+      let score = 0;
+      quizQuestions.forEach((item, i)=>{
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        const exp = document.getElementById(`explain${i}`);
+        if(selected){
+          const val = parseInt(selected.value, 10);
+          if(val === item.answer){ score++; exp.style.display='block'; exp.style.color='var(--good)'; }
+          else { exp.style.display='block'; exp.style.color='var(--warning)'; }
+        } else {
+          exp.style.display='block'; exp.style.color='var(--warning)';
+        }
+      });
+      quizScore.textContent = `Score: ${score} / ${quizQuestions.length}`;
+    }
+    function resetQuiz(){
+      renderQuiz();
+      quizScore.textContent = '';
+    }
+    renderQuiz();
+    submitQuizBtn.addEventListener('click', submitQuiz);
+    resetQuizBtn.addEventListener('click', resetQuiz);
+
+    /* ==========
+       SIMULATOR
+       ========== */
+    const agiYear = document.getElementById('agiYear');
+    const agiYearLabel = document.getElementById('agiYearLabel');
+    const benefitBar = document.getElementById('benefitBar');
+    const riskBar = document.getElementById('riskBar');
+    const scenarioText = document.getElementById('scenarioText');
+
+    function updateScenario(year){
+      const y = parseInt(year, 10);
+      agiYearLabel.textContent = y;
+      // Simple mappings: earlier AGI => higher risk and benefit; later => mature governance.
+      let benefit = 0, risk = 0, text = '';
+      if(y <= 2030){
+        benefit = 85; risk = 70;
+        text = "Early AGI arrival intensifies innovation but stresses governance; rapid capability growth risks uneven distribution and safety gaps.";
+      } else if(y <= 2045){
+        benefit = 75; risk = 55;
+        text = "Mid-term arrival allows institutions to adapt; benefits spread widely with evolving safety practices and auditing norms.";
+      } else if(y <= 2070){
+        benefit = 65; risk = 40;
+        text = "Later arrival yields robust standards; systems integrate with society through mature oversight and strong reliability.";
+      } else {
+        benefit = 55; risk = 35;
+        text = "Late arrival maximizes preparedness; benefits are steady, risks are contained, but opportunity costs of waiting may appear.";
+      }
+      benefitBar.style.width = benefit + '%';
+      riskBar.style.width = risk + '%';
+      scenarioText.textContent = text;
+    }
+    agiYear.addEventListener('input', (e)=>updateScenario(e.target.value));
+    updateScenario(agiYear.value);
+
+    /* ==========
+       SANDBOX
+       ========== */
+    const codeInput = document.getElementById('codeInput');
+    const codeOutput = document.getElementById('codeOutput');
+    const runCodeBtn = document.getElementById('runCode');
+    const clearCodeBtn = document.getElementById('clearCode');
+
+    function simulate(line){
+      const s = line.trim();
+      if(!s) return '';
+      if(s.startsWith('EMBED(')){
+        const content = s.match(/EMBED\('(.*)'\)/)?.[1] || 'text';
+        return `Embedding(${content}) -> [0.12, -0.47, 0.89, ...]  // simulated vector`;
+      }
+      if(s.startsWith('GENERATE(')){
+        const prompt = s.match(/GENERATE\('(.*)'\)/)?.[1] || 'prompt';
+        return `Generated text for: "${prompt}"\n- This is a simulated output with grounded style.`;
+      }
+      if(s.startsWith('CLASSIFY(')){
+        return `Classification -> label: not spam (confidence ~0.74)`;
+      }
+      if(s.startsWith('COSINE_SIM(')){
+        return `Cosine similarity -> 0.83 // simulated similarity score`;
+      }
+      if(s.startsWith('NEAREST(')){
+        return `Nearest neighbors -> ['cat', 'feline', 'kitten', 'pet', 'animal']`;
+      }
+      return `Unknown command. Try: EMBED('dog'), GENERATE('Explain RL'), CLASSIFY('text', ['spam','not spam']).`;
+    }
+    runCodeBtn.addEventListener('click', ()=>{
+      const lines = codeInput.value.split('\n');
+      const out = lines.map(simulate).join('\n');
+      codeOutput.textContent = out || '// No output';
+    });
+    clearCodeBtn.addEventListener('click', ()=>{
+      codeInput.value = '';
+      codeOutput.textContent = '';
+    });
+  </script>
+
+  <!-- ===========================
+       FOOTER
+       =========================== -->
+  <footer>
+    <div class="container">
+      <p>AGI Nexus — Single-file AI & AGI encyclopedia.</p>
+    </div>
+  </footer>
+</body>
+</html> contained, but opportunity costs of waiting may appear.";
+      }
+      benefitBar.style.width = benefit + '%';
+      riskBar.style.width = risk + '%';
+      scenarioText.textContent = text;
+    }
+    agiYear.addEventListener('input', (e)=>updateScenario(e.target.value));
+    updateScenario(agiYear.value);
+
+    /* ==========
+       SANDBOX
+       ========== */
+    const codeInput = document.getElementById('codeInput');
+    const codeOutput = document.getElementById('codeOutput');
+    const runCodeBtn = document.getElementById('runCode');
+    const clearCodeBtn = document.getElementById('clearCode');
+
+    function simulate(line){
+      const s = line.trim();
+      if(!s) return '';
+      if(s.startsWith('EMBED(')){
+        const content = s.match(/EMBED\('(.*)'\)/)?.[1] || 'text';
+        return `Embedding(${content}) -> [0.12, -0.47, 0.89, ...]  // simulated vector`;
+      }
+      if(s.startsWith('GENERATE(')){
+        const prompt = s.match(/GENERATE\('(.*)'\)/)?.[1] || 'prompt';
+        return `Generated text for: "${prompt}"\n- This is a simulated output with grounded style.`;
+      }
+      if(s.startsWith('CLASSIFY(')){
+        return `Classification -> label: not spam (confidence ~0.74)`;
+      }
+      if(s.startsWith('COSINE_SIM(')){
+        return `Cosine similarity -> 0.83 // simulated similarity score`;
+      }
+      if(s.startsWith('NEAREST(')){
+        return `Nearest neighbors -> ['cat', 'feline', 'kitten', 'pet', 'animal']`;
+      }
+      return `Unknown command. Try: EMBED('dog'), GENERATE('Explain RL'), CLASSIFY('text', ['spam','not spam']).`;
+    }
+    runCodeBtn.addEventListener('click', ()=>{
+      const lines = codeInput.value.split('\n');
+      const out = lines.map(simulate).join('\n');
+      codeOutput.textContent = out || '// No output';
+    });
+    clearCodeBtn.addEventListener('click', ()=>{
+      codeInput.value = '';
+      codeOutput.textContent = '';
+    });
+  </script>
+
+  <!-- ===========================
+       FOOTER
+       =========================== -->
+  <footer>
+    <div class="container">
+      <p>AGI Nexus — Single-file, massive AI & AGI encyclopedia. Save as index.html and host anywhere.</p>
+    </div>
+  </footer>
+</body>
+</html>
